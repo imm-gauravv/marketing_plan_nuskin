@@ -1,0 +1,1330 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nu Skin Growth Strategy | 6-Month Plan</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=DM+Sans:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* --- 1. VARIABLES --- */
+      :root {
+        /* Google Brand Colors + Extensions */
+        --blue: #4285f4;
+        --red: #ea4335;
+        --yellow: #fbbc04;
+        --green: #34a853;
+        --purple: #a142f4;
+        --pink: #f439a0;
+        --dark: #202124;
+        --grey: #f1f3f4;
+        --text: #202124;
+        --white: #ffffff;
+
+        --ease-out: cubic-bezier(0.2, 0, 0.2, 1);
+        --ease-in: cubic-bezier(0.6, 0, 0.8, 1);
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        background-color: var(--blue);
+        font-family: "DM Sans", sans-serif;
+        color: var(--text);
+        height: 100vh;
+        overflow: hidden;
+        transition: background-color 0.6s var(--ease-out);
+      }
+
+      /* --- 2. INTRO PAGE (New Minimal Layer) --- */
+      #intro {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: #fff;
+        z-index: 500;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        transition: transform 0.8s cubic-bezier(0.7, 0, 0.3, 1);
+      }
+
+      #intro.hidden {
+        transform: translateY(-100%);
+      }
+
+      .intro-content {
+        text-align: center;
+        animation: fadeInUp 1s ease-out;
+        padding: 2rem;
+      }
+
+      .intro-title {
+        font-family: "Google Sans", sans-serif;
+        font-size: 6rem;
+        font-weight: 700;
+        line-height: 1;
+        letter-spacing: -3px;
+        color: var(--blue);
+        margin-bottom: 1.5rem;
+      }
+
+      .intro-subtitle {
+        font-size: 1.5rem;
+        color: #5f6368;
+        margin-bottom: 3rem;
+        font-weight: 400;
+      }
+
+      .start-button {
+        background: var(--text);
+        color: white;
+        padding: 1.2rem 3rem;
+        border-radius: 100px;
+        font-size: 1.2rem;
+        font-weight: 700;
+        border: none;
+        cursor: pointer;
+        transition:
+          transform 0.2s,
+          background 0.2s;
+        font-family: "Google Sans", sans-serif;
+      }
+      .start-button:hover {
+        transform: scale(1.05);
+        background: var(--blue);
+      }
+
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @media (max-width: 768px) {
+        .intro-title {
+          font-size: 3.5rem;
+        }
+        .intro-subtitle {
+          font-size: 1.2rem;
+        }
+      }
+
+      /* --- 3. HEADER --- */
+      nav {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        padding: 2rem 3rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        z-index: 100;
+        pointer-events: none;
+      }
+
+      .nav-home-btn {
+        background: none;
+        border: none;
+        color: white;
+        font-family: "Google Sans", sans-serif;
+        font-weight: 700;
+        font-size: 1.1rem;
+        opacity: 0.9;
+        pointer-events: auto;
+        text-decoration: none;
+        text-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        cursor: pointer;
+        padding: 0;
+        transition: opacity 0.2s;
+      }
+
+      .nav-home-btn:hover {
+        opacity: 1;
+      }
+
+      .nav-text {
+        color: white;
+        font-family: "Google Sans", sans-serif;
+        font-weight: 500;
+        opacity: 0.9;
+        pointer-events: auto;
+        text-decoration: none;
+        text-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+      }
+
+      /* --- 4. MAIN STAGE --- */
+      .stage {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column; /* Changed for progress bar */
+        align-items: center;
+        justify-content: center;
+        position: relative;
+      }
+
+      /* --- 5. CARD STACK --- */
+      .card-container {
+        width: 400px;
+        height: 600px;
+        position: relative;
+        perspective: 1000px;
+        margin-bottom: 2rem; /* Space for progress */
+      }
+
+      /* The "Messy" Background Stack Effect */
+      .stack-layer {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(255, 255, 255, 0.4);
+        border-radius: 24px;
+        transform: rotate(-3deg) translate(-5px, 5px);
+        z-index: -1;
+        transition: transform 0.3s;
+      }
+      .stack-layer:nth-child(2) {
+        background: rgba(255, 255, 255, 0.2);
+        transform: rotate(-6deg) translate(-10px, 10px);
+        z-index: -2;
+      }
+
+      .card {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: var(--white);
+        border-radius: 24px;
+        padding: 2.5rem;
+        display: flex;
+        flex-direction: column;
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        cursor: pointer;
+        transition:
+          transform 0.6s var(--ease-out),
+          opacity 0.4s;
+        overflow: hidden;
+        transform-origin: center bottom;
+        border: 1px solid rgba(0, 0, 0, 0.05);
+      }
+
+      /* Card States for JS */
+      .card.active {
+        z-index: 10;
+        transform: translateX(0) rotate(0deg);
+        opacity: 1;
+      }
+
+      .card.exit-left {
+        transform: translateX(-120%) rotate(-10deg);
+        opacity: 0;
+        z-index: 5;
+      }
+
+      .card.waiting {
+        transform: translateX(20px) rotate(5deg) scale(0.95);
+        opacity: 0;
+        z-index: 0;
+      }
+
+      /* Card Visuals */
+      .pill {
+        display: inline-block;
+        padding: 6px 16px;
+        background: #f1f3f4;
+        border-radius: 50px;
+        font-family: "Google Sans", sans-serif;
+        font-weight: 500;
+        font-size: 0.85rem;
+        margin-bottom: 1.5rem;
+        width: fit-content;
+      }
+
+      .card-h2 {
+        font-family: "Google Sans", sans-serif;
+        font-size: 2.5rem;
+        line-height: 1.1;
+        margin-bottom: 2rem;
+        color: var(--text);
+      }
+
+      .card-visual {
+        margin-top: auto;
+        height: 220px;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .card-visual svg {
+        width: 100%;
+        height: 100%;
+        max-width: 250px;
+      }
+
+      /* --- 6. CONTROLS --- */
+      .controls {
+        position: absolute;
+        top: 50%;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        padding: 0 15%;
+        transform: translateY(-50%);
+        pointer-events: none;
+        z-index: 50;
+      }
+
+      .nav-btn {
+        background: none;
+        border: none;
+        font-family: "Google Sans", sans-serif;
+        font-size: 2rem;
+        font-weight: 700;
+        color: rgba(255, 255, 255, 0.6);
+        cursor: pointer;
+        pointer-events: auto;
+        transition: all 0.3s;
+        position: relative;
+        text-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .nav-btn:hover {
+        color: #fff;
+        transform: scale(1.05);
+      }
+
+      .nav-btn.primary {
+        color: #fff;
+        text-decoration: underline;
+        text-underline-offset: 8px;
+        text-decoration-thickness: 3px;
+      }
+
+      .nav-btn.hidden {
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      /* --- 7. PROGRESS INDICATOR (NEW) --- */
+      .progress-container {
+        position: relative;
+        width: 60px;
+        height: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 60;
+      }
+
+      .progress-ring__circle {
+        transition: stroke-dashoffset 0.5s var(--ease-out);
+        transform: rotate(-90deg);
+        transform-origin: 50% 50%;
+      }
+
+      .progress-text {
+        position: absolute;
+        font-family: "Google Sans", sans-serif;
+        font-size: 0.9rem;
+        font-weight: 700;
+        color: rgba(255, 255, 255, 0.9);
+      }
+
+      /* --- 8. DETAIL VIEW --- */
+      .detail-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: white;
+        z-index: 200;
+        overflow-y: auto;
+        transform: translateY(100%);
+        transition: transform 0.5s var(--ease-out);
+      }
+
+      .detail-overlay.open {
+        transform: translateY(0);
+      }
+
+      .detail-hero {
+        padding: 6rem 2rem 4rem;
+        text-align: center;
+        background: #fafafa;
+        border-bottom: 1px solid #eee;
+        transition: opacity 0.3s;
+      }
+
+      .detail-container {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 2rem 2rem 6rem;
+        transition:
+          opacity 0.3s,
+          transform 0.3s;
+      }
+
+      /* DETAIL NAVIGATION (NEW) */
+      .detail-nav-btn {
+        position: fixed;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 60px;
+        height: 60px;
+        background: white;
+        border-radius: 50%;
+        border: 1px solid #eee;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        cursor: pointer;
+        z-index: 202;
+        transition: all 0.2s;
+        color: #333;
+      }
+
+      .detail-nav-btn:hover {
+        transform: translateY(-50%) scale(1.1);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+        background: #f8f9fa;
+      }
+
+      .detail-prev {
+        left: 2rem;
+      }
+      .detail-next {
+        right: 2rem;
+      }
+
+      .detail-nav-btn.hidden {
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      /* Transition Classes */
+      .fade-out-left {
+        opacity: 0;
+        transform: translateX(-50px);
+      }
+      .fade-out-right {
+        opacity: 0;
+        transform: translateX(50px);
+      }
+      .fade-in {
+        opacity: 1;
+        transform: translateX(0);
+      }
+
+      .close-btn {
+        position: fixed;
+        top: 2rem;
+        right: 2rem;
+        width: 48px;
+        height: 48px;
+        background: #fff;
+        border-radius: 50%;
+        border: none;
+        font-size: 1.5rem;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 201;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        transition: transform 0.2s;
+      }
+      .close-btn:hover {
+        transform: scale(1.1);
+      }
+
+      /* --- 9. GRID VIEW --- */
+      .grid-view {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: var(--blue); /* Fallback */
+        z-index: 90;
+        padding: 6rem 2rem;
+        display: none;
+        overflow-y: auto;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        max-width: 1400px;
+        margin: 0 auto;
+      }
+
+      .grid-view.active {
+        display: grid;
+      }
+
+      .grid-card {
+        background: white;
+        border-radius: 24px;
+        padding: 2rem;
+        min-height: 400px;
+        cursor: pointer;
+        transition: transform 0.2s;
+        position: relative;
+        overflow: hidden;
+      }
+      .grid-card:hover {
+        transform: translateY(-5px);
+      }
+
+      /* --- 10. TOGGLE BAR --- */
+      .toggle-container {
+        position: fixed;
+        bottom: 2rem;
+        left: 50%;
+        transform: translateX(-50%);
+        background: #000;
+        border-radius: 50px;
+        padding: 4px;
+        display: flex;
+        gap: 4px;
+        z-index: 150;
+      }
+
+      .toggle-icon {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        border: none;
+        background: transparent;
+        color: #fff;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.2rem;
+      }
+      .toggle-icon.active {
+        background: #fff;
+        color: #000;
+      }
+
+      /* --- RESPONSIVE --- */
+      @media (max-width: 768px) {
+        .card-container {
+          width: 90%;
+          height: 550px;
+        }
+        .card h2 {
+          font-size: 2rem;
+        }
+
+        .controls {
+          top: auto;
+          bottom: 120px;
+          padding: 0 2rem;
+          transform: none;
+        }
+        .nav-btn {
+          font-size: 1.5rem;
+        }
+
+        .detail-hero {
+          padding: 4rem 1.5rem 2rem;
+        }
+        .detail-title {
+          font-size: 2.5rem;
+        }
+
+        .detail-nav-btn {
+          top: auto;
+          bottom: 2rem;
+          transform: none;
+          width: 50px;
+          height: 50px;
+          background: white;
+          box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        .detail-prev {
+          left: 1rem;
+        }
+        .detail-next {
+          right: 1rem;
+        }
+        .close-btn {
+          top: 1rem;
+          right: 1rem;
+        }
+      }
+
+      /* --- CONTENT STYLING --- */
+      .detail-h1 {
+        font-family: "Google Sans";
+        font-size: 3.5rem;
+        margin-bottom: 1rem;
+        line-height: 1.1;
+        color: #202124;
+        letter-spacing: -1px;
+      }
+
+      .section-block {
+        margin-bottom: 4rem;
+        padding: 2rem;
+        background: #fff;
+        border-radius: 24px;
+        border: 1px solid #eee;
+      }
+      .section-block.colored {
+        background: #f8f9fa;
+        border: none;
+      }
+
+      .section-title {
+        font-family: "Google Sans";
+        font-size: 1.8rem;
+        margin-bottom: 1.5rem;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .section-title::before {
+        content: "";
+        display: block;
+        width: 8px;
+        height: 24px;
+        background: var(--blue);
+        border-radius: 4px;
+      }
+
+      p {
+        color: #5f6368;
+        font-size: 1.15rem;
+        line-height: 1.7;
+        margin-bottom: 1.5rem;
+      }
+
+      /* Grids & Cards inside Detail */
+      .info-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1.5rem;
+      }
+      .info-card {
+        padding: 1.5rem;
+        border-radius: 16px;
+        background: white;
+        border: 1px solid #eee;
+        transition: transform 0.2s;
+      }
+      .info-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      }
+      .info-card strong {
+        display: block;
+        font-size: 1.2rem;
+        margin-bottom: 0.5rem;
+        color: #202124;
+      }
+
+      /* Stat Numbers */
+      .big-stat {
+        font-size: 3.5rem;
+        font-weight: 800;
+        color: var(--blue);
+        letter-spacing: -2px;
+        line-height: 1;
+        margin-bottom: 0.5rem;
+        display: block;
+      }
+
+      /* Checklists */
+      .check-list li {
+        list-style: none;
+        padding-left: 2.5rem;
+        position: relative;
+        margin-bottom: 1rem;
+        font-size: 1.2rem;
+        color: #3c4043;
+      }
+      .check-list li::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 4px;
+        width: 24px;
+        height: 24px;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2334A853'%3E%3Cpath d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z'/%3E%3C/svg%3E");
+      }
+    </style>
+  </head>
+  <body>
+    <!-- INTRO SPLASH SCREEN -->
+    <div id="intro">
+      <div class="intro-content">
+        <h1 class="intro-title">Nu Skin<br />Growth Plan</h1>
+        <p class="intro-subtitle">6-Month Integrated Campaign Strategy</p>
+        <button class="start-button" onclick="hideIntro()">
+          Explore Strategy ↓
+        </button>
+      </div>
+    </div>
+
+    <!-- NAV -->
+    <nav>
+      <button class="nav-home-btn" onclick="showIntro()">Nu Skin Growth</button>
+      <a href="#" class="nav-text">Share</a>
+    </nav>
+
+    <!-- STAGE -->
+    <div class="stage" id="stage">
+      <!-- Controls -->
+      <div class="controls">
+        <button class="nav-btn primary" id="nextBtn" onclick="nextCard()">
+          Next card
+        </button>
+        <button class="nav-btn hidden" id="prevBtn" onclick="prevCard()">
+          Previous
+        </button>
+      </div>
+
+      <div class="card-container">
+        <!-- Background Stack Layers -->
+        <div class="stack-layer"></div>
+        <div class="stack-layer"></div>
+
+        <!-- Cards Container -->
+        <div id="card-deck"></div>
+      </div>
+
+      <!-- Progress Ring -->
+      <div class="progress-container">
+        <svg class="progress-ring" width="60" height="60">
+          <circle
+            class="progress-ring__circle-bg"
+            stroke="rgba(255,255,255,0.3)"
+            stroke-width="4"
+            fill="transparent"
+            r="26"
+            cx="30"
+            cy="30"
+          />
+          <circle
+            class="progress-ring__circle"
+            stroke="white"
+            stroke-width="4"
+            fill="transparent"
+            r="26"
+            cx="30"
+            cy="30"
+            style="stroke-dasharray: 163.36; stroke-dashoffset: 163.36"
+          />
+        </svg>
+        <span class="progress-text" id="progressText">0%</span>
+      </div>
+    </div>
+
+    <!-- GRID VIEW -->
+    <div class="grid-view" id="gridView">
+      <!-- Injected via JS -->
+    </div>
+
+    <!-- DETAIL OVERLAY -->
+    <div class="detail-overlay" id="detailOverlay">
+      <button class="close-btn" onclick="closeDetail()">×</button>
+
+      <!-- Detail Navigation Arrows -->
+      <button class="detail-nav-btn detail-prev" onclick="navigateDetail(-1)">
+        ←
+      </button>
+      <button class="detail-nav-btn detail-next" onclick="navigateDetail(1)">
+        →
+      </button>
+
+      <div class="detail-hero" id="detailHero"></div>
+      <div class="detail-container">
+        <div id="detailContent"></div>
+      </div>
+    </div>
+
+    <!-- TOGGLE BAR -->
+    <div class="toggle-container">
+      <button class="toggle-icon active" onclick="setView('stack')">▮</button>
+      <button class="toggle-icon" onclick="setView('grid')">☷</button>
+    </div>
+
+    <script>
+      function hideIntro() {
+        document.getElementById("intro").classList.add("hidden");
+      }
+
+      function showIntro() {
+        document.getElementById("intro").classList.remove("hidden");
+      }
+
+      // SVG ICONS
+      const icons = {
+        intro: `<svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="100" cy="100" r="80" fill="#E8F0FE"/><path d="M70 100l30 30 60-60" stroke="#4285F4" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+        brand: `<svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M40 100c0-33 27-60 60-60s60 27 60 60-27 60-60 60-60-27-60-60z" fill="#FBBC04"/><circle cx="100" cy="100" r="30" fill="white"/></svg>`,
+        funnel: `<svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M20 40h160L110 120v60l-20-20v-40L20 40z" fill="#EA4335"/><circle cx="100" cy="40" r="10" fill="#FBBC04"/><rect x="80" y="140" width="40" height="10" fill="#34A853"/></svg>`,
+        audience: `<svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="100" cy="80" r="40" fill="#34A853"/><path d="M40 180c0-33 27-60 60-60s60 27 60 60" fill="#34A853" opacity="0.5"/></svg>`,
+        sem: `<svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="40" y="60" width="120" height="80" rx="10" stroke="#A142F4" stroke-width="8"/><path d="M60 100h80" stroke="#A142F4" stroke-width="8"/></svg>`,
+        budget: `<svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="100" cy="100" r="80" fill="#E8F0FE"/><path d="M100 100L100 20A80 80 0 0 1 180 100z" fill="#F439A0"/><path d="M100 100L180 100A80 80 0 0 1 100 180z" fill="#EA4335"/></svg>`,
+        tofu: `<svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M60 140V60l80 40-80 40z" fill="#4285F4"/><circle cx="140" cy="100" r="10" fill="#FBBC04"/></svg>`,
+        mofu: `<svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="80" cy="100" r="40" fill="#FBBC04"/><circle cx="120" cy="100" r="40" fill="#FBBC04" opacity="0.7"/></svg>`,
+        bofu: `<svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="60" y="80" width="80" height="60" rx="8" fill="#EA4335"/><path d="M90 80V60a10 10 0 0 1 20 0v20" stroke="#EA4335" stroke-width="8"/></svg>`,
+        tech: `<svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M60 80l20 20-20 20M140 120h-40" stroke="#34A853" stroke-width="8"/><circle cx="100" cy="100" r="80" stroke="#34A853" stroke-width="4"/></svg>`,
+        audit: `<svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="90" cy="90" r="50" stroke="#A142F4" stroke-width="12"/><path d="M125 125l35 35" stroke="#A142F4" stroke-width="12"/></svg>`,
+        seo: `<svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M60 100h80M100 60v80" stroke="#F439A0" stroke-width="12"/><circle cx="100" cy="100" r="80" stroke="#F439A0" stroke-width="4"/></svg>`,
+        social: `<svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="60" y="40" width="80" height="120" rx="10" stroke="#4285F4" stroke-width="8"/><circle cx="100" cy="140" r="6" fill="#4285F4"/></svg>`,
+        ambassador: `<svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M100 40l20 60h60l-50 40 20 60-50-40-50 40 20-60-50-40h60z" fill="#FBBC04"/></svg>`,
+        summary: `<svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M60 100l30 30 50-50" stroke="#202124" stroke-width="16" stroke-linecap="round"/><rect x="20" y="20" width="160" height="160" rx="20" stroke="#202124" stroke-width="8"/></svg>`,
+      };
+
+      const strategies = [
+        {
+          id: 0,
+          pill: "Introduction",
+          title: "How I Approach Nu Skin’s Growth",
+          color: "#4285F4", // Blue
+          visual: icons.intro,
+          content: `
+                    <div class="section-block colored">
+                        <div class="section-title">My Philosophy</div>
+                        <p>Growth isn't just about spending budget; it's about building a sustainable ecosystem. For Nu Skin, this means leveraging 40+ years of science to create trust, then using precision targeting to convert that trust into sales.</p>
+                        <div class="section-title" style="margin-top: 2rem;">Strategic Pillars</div>
+                        <ul class="check-list">
+                            <li><strong>Full-Funnel:</strong> Awareness to Conversion.</li>
+                            <li><strong>Data-Driven:</strong> Decisions based on ROAS & CPA.</li>
+                            <li><strong>Brand-Aligned:</strong> Science-backed positioning.</li>
+                        </ul>
+                    </div>`,
+        },
+        {
+          id: 1,
+          pill: "Brand Context",
+          title: "Brand & Website Understanding",
+          color: "#FBBC04", // Yellow
+          visual: icons.brand,
+          content: `
+                    <div class="section-block">
+                        <div class="section-title">Key Strengths Analyzed</div>
+                        <ul class="check-list">
+                            <li><strong>Innovation:</strong> ageLOC technology & devices (LumiSpa).</li>
+                            <li><strong>Authority:</strong> 40+ years of research vs fleeting trends.</li>
+                            <li><strong>Community:</strong> A powerful network of advocates to activate.</li>
+                        </ul>
+                    </div>
+                    <div class="section-block colored">
+                        <div class="section-title">Website Focus Areas</div>
+                        <p>Prioritizing high-impact sections for optimization:</p>
+                        <div class="info-grid">
+                            <div class="info-card">Beauty & Skincare</div>
+                            <div class="info-card">Smart Devices</div>
+                            <div class="info-card">Nutrition</div>
+                        </div>
+                    </div>`,
+        },
+        {
+          id: 2,
+          pill: "Strategy",
+          title: "Business Objective & Funnel",
+          color: "#EA4335", // Red
+          visual: icons.funnel,
+          content: `
+                    <div class="section-block colored">
+                        <div class="section-title">Primary Goal</div>
+                        <p class="big-stat">Increase Revenue</p>
+                        <p>Scaling US online sales while maintaining efficiency.</p>
+                        
+                        <div class="section-title" style="margin-top: 2rem;">The Funnel</div>
+                        <div class="info-grid">
+                            <div class="info-card" style="border-left: 4px solid #4285F4"><strong>TOFU</strong><br>Awareness</div>
+                            <div class="info-card" style="border-left: 4px solid #FBBC04"><strong>MOFU</strong><br>Consideration</div>
+                            <div class="info-card" style="border-left: 4px solid #34A853"><strong>BOFU</strong><br>Conversion</div>
+                        </div>
+                    </div>`,
+        },
+        {
+          id: 3,
+          pill: "Audience",
+          title: "Target Audience Definition",
+          color: "#34A853", // Green
+          visual: icons.audience,
+          content: `
+                    <div class="section-block">
+                        <div class="section-title">Core Segments</div>
+                        <ul class="check-list">
+                            <li><strong>The Optimizer (25-45):</strong> Loves beauty-tech gadgets (LumiSpa).</li>
+                            <li><strong>The Researcher (30-55):</strong> Reads ingredients, values clinical proof.</li>
+                            <li><strong>The Preventative:</strong> Gen Z/Millennials starting anti-aging early.</li>
+                        </ul>
+                    </div>
+                    <div class="section-block colored">
+                        <div class="section-title">Key Platforms</div>
+                        <p>Where they spend time:</p>
+                        <div class="info-grid">
+                            <div class="info-card">Instagram</div>
+                            <div class="info-card">Google Search</div>
+                            <div class="info-card">YouTube</div>
+                        </div>
+                    </div>`,
+        },
+        {
+          id: 4,
+          pill: "PPC Overview",
+          title: "SEM / PPC Strategy Overview",
+          color: "#A142F4", // Purple
+          visual: icons.sem,
+          content: `
+                    <div class="section-block colored">
+                        <div class="section-title">Phased Rollout</div>
+                        <ul class="check-list">
+                            <li><strong>Month 1-2: Launch & Learn</strong><br>Data gathering & testing creative winners.</li>
+                            <li><strong>Month 3-4: Optimize</strong><br>Refining audiences & scaling best performers.</li>
+                            <li><strong>Month 5-6: Scale</strong><br>Aggressive scaling & retargeting efficiency.</li>
+                        </ul>
+                    </div>
+                    <div class="section-block">
+                        <div class="section-title">Monthly Budget</div>
+                        <p class="big-stat">$20,000</p>
+                    </div>`,
+        },
+        {
+          id: 5,
+          pill: "Budget",
+          title: "Budget Split & Expected ROAS",
+          color: "#F439A0", // Pink
+          visual: icons.budget,
+          content: `
+                    <div class="section-block">
+                        <div class="section-title">Allocation Strategy</div>
+                        <div class="info-grid">
+                            <div class="info-card" style="border-top: 4px solid #4285F4"><strong>$8k Google</strong><br>Search & Shopping<br><em>40%</em></div>
+                            <div class="info-card" style="border-top: 4px solid #EA4335"><strong>$7k Meta</strong><br>Prospecting (TOFU)<br><em>35%</em></div>
+                            <div class="info-card" style="border-top: 4px solid #FBBC04"><strong>$5k Meta</strong><br>Retargeting<br><em>25%</em></div>
+                        </div>
+                    </div>
+                    <div class="section-block colored">
+                        <div class="section-title">Expected ROAS</div>
+                        <ul class="check-list">
+                            <li><strong>Google Ads:</strong> 4-5x (High Intent)</li>
+                            <li><strong>Meta Prospecting:</strong> 2-3x (Demand Gen)</li>
+                            <li><strong>Meta Retargeting:</strong> 3-4x (Conversion)</li>
+                        </ul>
+                    </div>`,
+        },
+        {
+          id: 6,
+          pill: "TOFU",
+          title: "PPC – Awareness Strategy",
+          color: "#4285F4", // Blue
+          visual: icons.tofu,
+          content: `
+                    <div class="section-block colored">
+                        <div class="section-title">Tactics</div>
+                        <ul class="check-list">
+                            <li><strong>Broad Targeting:</strong> Letting the algorithm find hand-raisers.</li>
+                            <li><strong>Video First:</strong> "Science of Skin" visuals & influencer unboxings.</li>
+                            <li><strong>Objective:</strong> Reach, Video Views, ThruPlay.</li>
+                        </ul>
+                    </div>
+                    <div class="section-block">
+                        <div class="section-title">Messaging</div>
+                        <p><em>“Discover the best you, inside & out”</em><br><em>“Science-backed beauty & wellness”</em></p>
+                    </div>`,
+        },
+        {
+          id: 7,
+          pill: "MOFU",
+          title: "PPC – Consideration Strategy",
+          color: "#FBBC04", // Yellow
+          visual: icons.mofu,
+          content: `
+                    <div class="section-block">
+                        <div class="section-title">Tactics</div>
+                        <ul class="check-list">
+                            <li><strong>Retargeting:</strong> Users who watched >50% of video or visited site.</li>
+                            <li><strong>Content:</strong> "Why Nu Skin?" carousels, Ingredient spotlights.</li>
+                            <li><strong>Objective:</strong> Traffic, Landing Page Views.</li>
+                        </ul>
+                    </div>
+                    <div class="section-block colored">
+                        <div class="section-title">Landing Pages</div>
+                        <div class="info-grid">
+                            <div class="info-card">LumiSpa iO Page</div>
+                            <div class="info-card">ageLOC Page</div>
+                            <div class="info-card">Bundles & Kits</div>
+                        </div>
+                    </div>`,
+        },
+        {
+          id: 8,
+          pill: "BOFU",
+          title: "PPC – Conversion Strategy",
+          color: "#EA4335", // Red
+          visual: icons.bofu,
+          content: `
+                    <div class="section-block colored">
+                        <div class="section-title">Tactics</div>
+                        <ul class="check-list">
+                            <li><strong>Google Search:</strong> "Best anti-aging device", "Nu Skin reviews".</li>
+                            <li><strong>Shopping Ads:</strong> Visual product listings for LumiSpa.</li>
+                            <li><strong>DPA (Meta):</strong> Dynamic Product Ads for cart abandoners.</li>
+                        </ul>
+                    </div>
+                    <div class="section-block">
+                        <div class="section-title">Conversion Drivers</div>
+                        <p>Offers & bundles, Free shipping, Limited-time promotions.</p>
+                    </div>`,
+        },
+        {
+          id: 9,
+          pill: "Tech Stack",
+          title: "Tracking & Tag Setup",
+          color: "#34A853", // Green
+          visual: icons.tech,
+          content: `
+                    <div class="section-block">
+                        <div class="section-title">Tools</div>
+                        <div class="info-grid">
+                            <div class="info-card">Google Tag Manager</div>
+                            <div class="info-card">GA4</div>
+                            <div class="info-card">Meta Pixel</div>
+                        </div>
+                    </div>
+                    <div class="section-block colored">
+                        <div class="section-title">Setup</div>
+                        <ul class="check-list">
+                            <li><strong>Events:</strong> Page view, View content, Add to cart, Purchase (with value).</li>
+                            <li><strong>UTM Structure:</strong> Source, Medium, Campaign, Funnel Stage.</li>
+                        </ul>
+                    </div>`,
+        },
+        {
+          id: 10,
+          pill: "SEO Audit",
+          title: "SEO Technical Audit Process",
+          color: "#A142F4", // Purple
+          visual: icons.audit,
+          content: `
+                    <div class="section-block colored">
+                        <div class="section-title">Audit Checklist</div>
+                        <ul class="check-list">
+                            <li><strong>Tools:</strong> Screaming Frog, GSC, PageSpeed Insights.</li>
+                            <li><strong>Checks:</strong> Broken links, Core Web Vitals, Schema markup.</li>
+                            <li><strong>Goal:</strong> A frictionless foundation for organic growth.</li>
+                        </ul>
+                    </div>`,
+        },
+        {
+          id: 11,
+          pill: "Link Building",
+          title: "SEO Link Building Strategy",
+          color: "#F439A0", // Pink
+          visual: icons.seo,
+          content: `
+                    <div class="section-block">
+                        <div class="section-title">Tactics</div>
+                        <ul class="check-list">
+                            <li><strong>Digital PR:</strong> Stories on "The Future of Beauty Tech".</li>
+                            <li><strong>Partnerships:</strong> Collabs with Dermatology blogs.</li>
+                            <li><strong>Skyscraper:</strong> "Ultimate Guide to Anti-Aging Ingredients".</li>
+                        </ul>
+                    </div>
+                    <div class="section-block colored">
+                        <div class="section-title">Goal</div>
+                        <p>Increase domain authority, Improve rankings, Drive organic conversions.</p>
+                    </div>`,
+        },
+        {
+          id: 12,
+          pill: "Content",
+          title: "Social Media: 1-Week Plan",
+          color: "#4285F4", // Blue
+          visual: icons.social,
+          content: `
+                    <div class="section-block colored">
+                        <div class="section-title">Weekly Rhythm (4-6 Posts)</div>
+                        <div class="info-grid">
+                            <div class="info-card"><strong>Product Demo</strong><br>Reel</div>
+                            <div class="info-card"><strong>Education</strong><br>Carousel</div>
+                            <div class="info-card"><strong>Social Proof</strong><br>Before/After</div>
+                            <div class="info-card"><strong>Wellness</strong><br>Tip/Advice</div>
+                        </div>
+                    </div>
+                    <div class="section-block">
+                        <div class="section-title">Focus</div>
+                        <p>Education, Trust, Engagement.</p>
+                    </div>`,
+        },
+        {
+          id: 13,
+          pill: "Community",
+          title: "Followers to Ambassadors",
+          color: "#FBBC04", // Yellow
+          visual: icons.ambassador,
+          content: `
+                    <div class="section-block">
+                        <div class="section-title">Strategy</div>
+                        <ul class="check-list">
+                            <li><strong>Identify:</strong> Find loyal customers.</li>
+                            <li><strong>Program:</strong> Create ambassador tier.</li>
+                            <li><strong>Incentivize:</strong> Referral codes & exclusive perks.</li>
+                        </ul>
+                    </div>
+                    <div class="section-block colored">
+                        <div class="section-title">Timeline</div>
+                        <p><strong>Month 3:</strong> Recruit<br><strong>Month 4-5:</strong> Activate<br><strong>Month 6:</strong> Scale</p>
+                    </div>`,
+        },
+        {
+          id: 14,
+          pill: "Summary",
+          title: "Final Summary & Impact",
+          color: "#202124", // Dark
+          visual: icons.summary,
+          content: `
+                    <div class="section-block colored">
+                        <div class="section-title">Why This Works</div>
+                        <ul class="check-list">
+                            <li><strong>Full-Funnel:</strong> A complete growth system.</li>
+                            <li><strong>Paid Media:</strong> Drives demand.</li>
+                            <li><strong>SEO:</strong> Builds authority.</li>
+                            <li><strong>Social:</strong> Builds trust & community.</li>
+                        </ul>
+                    </div>
+                    <div class="section-block">
+                        <div class="section-title">Closing Line</div>
+                        <p style="font-size: 1.5rem; font-weight: 500; font-family: 'Google Sans';">“This is how I would systematically grow Nu Skin’s US sales while protecting its science-led brand.”</p>
+                    </div>`,
+        },
+      ];
+
+      let currentIndex = 0;
+      let currentDetailIndex = 0;
+      const deck = document.getElementById("card-deck");
+      const grid = document.getElementById("gridView");
+
+      // Initial Render
+      function renderCards() {
+        // Stack Render
+        deck.innerHTML = strategies
+          .map((card, i) => {
+            let className = "card waiting";
+            if (i === 0) className = "card active";
+            return `
+                    <div class="${className}" id="card-${i}" onclick="openDetail(${i})">
+                        <div class="pill">${card.pill}</div>
+                        <h2 class="card-h2">${card.title}</h2>
+                        <div class="card-visual">
+                            ${card.visual}
+                        </div>
+                        <div style="margin-top: auto; font-weight: 700; color: #aaa; font-size: 0.9rem;">Tap to expand ↘</div>
+                    </div>
+                `;
+          })
+          .join("");
+
+        // Grid Render
+        grid.innerHTML = strategies
+          .map(
+            (card, i) => `
+                <div class="grid-card" onclick="openDetail(${i})">
+                    <div class="pill">${card.pill}</div>
+                    <h2 class="card-h2">${card.title}</h2>
+                    <div class="card-visual" style="height: 120px;">${card.visual}</div>
+                </div>
+            `,
+          )
+          .join("");
+      }
+
+      // Logic
+      function updateState() {
+        // Update Body Background
+        document.body.style.backgroundColor = strategies[currentIndex].color;
+        document.getElementById("gridView").style.backgroundColor =
+          strategies[currentIndex].color;
+
+        // Update Progress
+        const progress = ((currentIndex + 1) / strategies.length) * 100;
+        const circle = document.querySelector(".progress-ring__circle");
+        const radius = circle.r.baseVal.value;
+        const circumference = radius * 2 * Math.PI;
+
+        const offset = circumference - (progress / 100) * circumference;
+        circle.style.strokeDashoffset = offset;
+
+        document.getElementById("progressText").innerText =
+          `${Math.round(progress)}%`;
+
+        // Update Cards
+        strategies.forEach((_, i) => {
+          const el = document.getElementById(`card-${i}`);
+          el.className = "card"; // Reset
+
+          if (i === currentIndex) {
+            el.classList.add("active");
+          } else if (i < currentIndex) {
+            el.classList.add("exit-left");
+          } else {
+            el.classList.add("waiting");
+          }
+        });
+
+        // Update Buttons
+        const prev = document.getElementById("prevBtn");
+        const next = document.getElementById("nextBtn");
+
+        if (currentIndex === 0) {
+          prev.classList.add("hidden");
+          next.classList.remove("hidden");
+        } else if (currentIndex === strategies.length - 1) {
+          next.classList.add("hidden");
+          prev.classList.remove("hidden");
+        } else {
+          next.classList.remove("hidden");
+          prev.classList.remove("hidden");
+        }
+      }
+
+      function nextCard() {
+        if (currentIndex < strategies.length - 1) {
+          currentIndex++;
+          updateState();
+        }
+      }
+
+      function prevCard() {
+        if (currentIndex > 0) {
+          currentIndex--;
+          updateState();
+        }
+      }
+
+      // Detail View Logic
+      function openDetail(index) {
+        currentDetailIndex = index;
+        updateDetailView(index);
+        document.getElementById("detailOverlay").classList.add("open");
+      }
+
+      function updateDetailView(index) {
+        const data = strategies[index];
+        const content = document.getElementById("detailContent");
+        const hero = document.getElementById("detailHero");
+        const prevBtn = document.querySelector(".detail-prev");
+        const nextBtn = document.querySelector(".detail-next");
+
+        // Header Update
+        hero.innerHTML = `
+                <div class="pill" style="background:${data.color}; color:${data.color === "#202124" ? "white" : "#202124"};">${data.pill}</div>
+                <h1 class="detail-h1">${data.title}</h1>
+            `;
+
+        // Content Update
+        content.innerHTML = data.content;
+
+        // Nav State
+        if (index === 0) prevBtn.classList.add("hidden");
+        else prevBtn.classList.remove("hidden");
+
+        if (index === strategies.length - 1) nextBtn.classList.add("hidden");
+        else nextBtn.classList.remove("hidden");
+      }
+
+      function navigateDetail(direction) {
+        const newIndex = currentDetailIndex + direction;
+
+        if (newIndex >= 0 && newIndex < strategies.length) {
+          const container = document.querySelector(".detail-container");
+          const hero = document.querySelector(".detail-hero");
+
+          // Animate Out
+          container.style.opacity = "0";
+          container.style.transform =
+            direction > 0 ? "translateX(-50px)" : "translateX(50px)";
+          hero.style.opacity = "0";
+
+          setTimeout(() => {
+            currentDetailIndex = newIndex;
+            updateDetailView(newIndex);
+
+            // Animate In
+            container.style.transform =
+              direction > 0 ? "translateX(50px)" : "translateX(-50px)";
+
+            // Trigger reflow
+            void container.offsetWidth;
+
+            container.style.opacity = "1";
+            container.style.transform = "translateX(0)";
+            hero.style.opacity = "1";
+
+            // Sync main card state if needed (optional)
+            currentIndex = newIndex;
+            updateState();
+          }, 300);
+        }
+      }
+
+      function closeDetail() {
+        document.getElementById("detailOverlay").classList.remove("open");
+      }
+
+      // View Toggles
+      function setView(mode) {
+        const gridEl = document.getElementById("gridView");
+        const toggleBtns = document.querySelectorAll(".toggle-icon");
+
+        if (mode === "grid") {
+          gridEl.classList.add("active");
+          toggleBtns[0].classList.remove("active");
+          toggleBtns[1].classList.add("active");
+        } else {
+          gridEl.classList.remove("active");
+          toggleBtns[1].classList.remove("active");
+          toggleBtns[0].classList.add("active");
+        }
+      }
+
+      // Keyboard Navigation in Detail View
+      document.addEventListener("keydown", (e) => {
+        if (
+          document.getElementById("detailOverlay").classList.contains("open")
+        ) {
+          if (e.key === "ArrowRight") navigateDetail(1);
+          if (e.key === "ArrowLeft") navigateDetail(-1);
+          if (e.key === "Escape") closeDetail();
+        }
+      });
+
+      // Init
+      renderCards();
+      updateState();
+    </script>
+  </body>
+</html>
